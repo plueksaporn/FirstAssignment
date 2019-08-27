@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-struct Mobiles {
+struct Mobiles:Codable {
     let rating:Double
     let id:Int
     let thumbImageURL:String
@@ -19,8 +19,22 @@ struct Mobiles {
     let description:String
 }
 
-struct Images {
+struct Images:Codable{
     let mobileId:Int
     let id:Int
     let url:String
 }
+
+
+
+//extension Mobiles{
+//    init(json : JSON) {
+//        rating = Double(json["rating"].intValue)
+//        id = json["id"].intValue
+//        thumbImageURL = json["thumbImageURL"].stringValue
+//        price = Double(json["price"].intValue)
+//        brand = json["brand"].stringValue
+//        name = json["name"].stringValue
+//        description = json["description"].stringValue
+//    }
+//}
