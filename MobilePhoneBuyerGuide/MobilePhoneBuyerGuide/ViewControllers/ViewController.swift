@@ -13,6 +13,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var favBtn: UIButton!
     @IBOutlet weak var allBtn: UIButton!
     @IBOutlet weak var mTable: UITableView!
+    @IBOutlet weak var mSortBtn: UIButton!
     
     let api = APIManager()
     var mobiles: [Mobiles] = [] {
@@ -53,7 +54,43 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         cell.MappingData(mobiles:mobilesData)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let item = self.mobiles[indexPath.row]
+        self.performSegue(withIdentifier: "showMobileDetail", sender: item)
 
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMobileDetail",
+            let viewController = segue.destination as? MobileDetailViewController,
+            let selected = sender as? Mobiles {
+            viewController.detail = selected
+        }
+    }
+   
+    @IBAction func onAllBtnClick(_ sender: UIButton) {
+        allBtn.isSelected = true
+        favBtn.isSelected = false
+        
+    }
+    
+    @IBAction func onFavBtnClick(_ sender: UIButton) {
+        allBtn.isSelected = false
+        favBtn.isSelected = true
+    }
+    @IBAction func onSortBtnClick(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Sort", message: "", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+   
+    }
+    func Message(){
+        
+    }
+    
+  
 
 }
 

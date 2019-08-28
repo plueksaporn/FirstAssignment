@@ -10,6 +10,7 @@
 		612B5FAA2DC100AAB5702DDE /* Pods_MobilePhoneBuyerGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96FC56C7DC849CE8653528D5 /* Pods_MobilePhoneBuyerGuide.framework */; };
 		E44CF4EA23152C09002BE981 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44CF4E923152C09002BE981 /* CustomViewCell.swift */; };
 		E44CF4EC23153088002BE981 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44CF4EB23153088002BE981 /* API.swift */; };
+		E497ED3D2316668A0065B7F7 /* MobileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E497ED3C2316668A0065B7F7 /* MobileDetailViewController.swift */; };
 		E4A4CBC32315173800A02B9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4CBC22315173800A02B9E /* AppDelegate.swift */; };
 		E4A4CBC52315173800A02B9E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4CBC42315173800A02B9E /* ViewController.swift */; };
 		E4A4CBC82315173800A02B9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4A4CBC62315173800A02B9E /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		AC2EDE7C2E6AE29673C24DA9 /* Pods-MobilePhoneBuyerGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobilePhoneBuyerGuide.release.xcconfig"; path = "Target Support Files/Pods-MobilePhoneBuyerGuide/Pods-MobilePhoneBuyerGuide.release.xcconfig"; sourceTree = "<group>"; };
 		E44CF4E923152C09002BE981 /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
 		E44CF4EB23153088002BE981 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		E497ED3C2316668A0065B7F7 /* MobileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDetailViewController.swift; sourceTree = "<group>"; };
 		E4A4CBBF2315173800A02B9E /* MobilePhoneBuyerGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobilePhoneBuyerGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4A4CBC22315173800A02B9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4A4CBC42315173800A02B9E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				E4A4CBC42315173800A02B9E /* ViewController.swift */,
 				E44CF4E923152C09002BE981 /* CustomViewCell.swift */,
+				E497ED3C2316668A0065B7F7 /* MobileDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				E44CF4EA23152C09002BE981 /* CustomViewCell.swift in Sources */,
 				E4A4CBC52315173800A02B9E /* ViewController.swift in Sources */,
 				E4A4CBC32315173800A02B9E /* AppDelegate.swift in Sources */,
+				E497ED3D2316668A0065B7F7 /* MobileDetailViewController.swift in Sources */,
 				E44CF4EC23153088002BE981 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

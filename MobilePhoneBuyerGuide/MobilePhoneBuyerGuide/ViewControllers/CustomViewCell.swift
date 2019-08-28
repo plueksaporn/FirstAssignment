@@ -10,13 +10,13 @@ import UIKit
 import Kingfisher
 class CustomViewCell: UITableViewCell {
 
-    @IBOutlet weak var mCard: UIView!
+    @IBOutlet weak var mRating: UILabel!
+    @IBOutlet weak var mPrice: UILabel!
     @IBOutlet weak var mImage: UIImageView!
     @IBOutlet weak var mTitle: UILabel!
     @IBOutlet weak var mDes: UILabel!
-    @IBOutlet weak var mPrice: UILabel!
-    
-    @IBOutlet weak var mRating: UILabel!
+    @IBOutlet weak var mFavourite: UIButton!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,9 +26,9 @@ class CustomViewCell: UITableViewCell {
         mImage.kf.setImage(with:URL(string: mobiles.thumbImageURL))
         mTitle.text=mobiles.name
         mDes.text=mobiles.description
-        mPrice.text=String(mobiles.price)
-        mRating.text=String(mobiles.rating)
-        
+        mPrice.text="Price: $\(String(mobiles.price))"
+        mRating.text="Rating: \(String(mobiles.rating))"
+        mobiles.favouriteStatus = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -36,5 +36,13 @@ class CustomViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func onFavouriteItemClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        print("index path: \(sender.titleLabel)")
+    }
+    
+   
+    
 
 }
