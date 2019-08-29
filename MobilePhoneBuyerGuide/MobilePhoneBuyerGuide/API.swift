@@ -12,10 +12,12 @@ import SwiftyJSON
 
 protocol APIManagerProtocol {
     func getMobilesData(completion: @escaping (Swift.Result<[Mobiles], Error>) -> Void)
-    func getImages(mobileId: Int, completion: @escaping (Swift.Result<[Images], Error>) -> Void)
+    func getImages(mobileId: Int, completion: @escaping (Images) -> Void)
 }
 
 class APIManager:APIManagerProtocol{
+    
+    
     var baseURL:String = "https://scb-test-mobile.herokuapp.com/api/mobiles/"
     static let shared: APIManager = APIManager()
     
@@ -37,21 +39,26 @@ class APIManager:APIManagerProtocol{
         }
     }
     
-    func getImages(mobileId: Int, completion: @escaping (Swift.Result<[Images], Error>) -> Void) {
+    func getImages(mobileId: Int, completion: @escaping (Images) -> Void) {
         self.baseURL = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(mobileId)/images/"
+        print(self.baseURL)
         Alamofire.request("\(baseURL)")
             .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success:
                     do {
-                        let images = try JSONDecoder().decode([Images].self, from: response.data!)
-                        completion(.success(images))
+                        let images = try JSONDecoder().decode(Images.self, from: response.data!)
+                        completion(images)
                     } catch (let error) {
-                        completion(.failure(error))
+                        print(error)
+//                        completion(.failure(error))
                     }
+                    break
                 case .failure(let error):
-                    completion(.failure(error))
+//                    completion("")
+                    print(error)
+                    break
                 }
         }
     }

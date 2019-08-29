@@ -20,11 +20,20 @@ class Mobiles:Codable {
     var favouriteStatus:Bool?
 }
 
-struct Images:Codable{
-    let mobileId:Int
-    let id:Int
-    let url:String
+struct ImagesElement: Codable {
+    let id: Int
+    let url: String
+    let mobileID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case id, url
+        case mobileID = "mobile_id"
+    }
 }
+
+typealias Images = [ImagesElement]
+
+
 
 
 

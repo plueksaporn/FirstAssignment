@@ -9,6 +9,7 @@ target 'MobilePhoneBuyerGuide' do
   pod 'Alamofire'
   pod 'Kingfisher'
   pod 'SwiftyJSON'
+  pod 'ImageSlideshow/Kingfisher'
 
   #target 'MobilePhoneBuyerGuide' do
    # inherit! :search_paths

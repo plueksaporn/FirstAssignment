@@ -13,20 +13,23 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var favBtn: UIButton!
     @IBOutlet weak var allBtn: UIButton!
     @IBOutlet weak var mTable: UITableView!
-    @IBOutlet weak var mSortBtn: UIButton!
-    
     let api = APIManager()
+    var mobileList: [Mobiles] = []
     var mobiles: [Mobiles] = [] {
         didSet {
             mTable.reloadData()
         }
     }
+    var favList : [Mobiles] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mTable.estimatedRowHeight = CGFloat(500)
         mTable.rowHeight = UITableView.automaticDimension
         feedData()
+        let sortBtn = UIBarButtonItem(title: "Sort", style: .plain, target: self, action:#selector(onSortBtnClick(_:)) )
+        self.navigationItem.rightBarButtonItem = sortBtn
+       
     }
     
     func feedData(){
@@ -52,6 +55,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let cell = mTable.dequeueReusableCell(withIdentifier: "cell") as! CustomViewCell
         let mobilesData: Mobiles = mobiles[indexPath.item]
         cell.MappingData(mobiles:mobilesData)
+        cell.delegate = self
         return cell
     }
     
@@ -73,21 +77,61 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBAction func onAllBtnClick(_ sender: UIButton) {
         allBtn.isSelected = true
         favBtn.isSelected = false
-        
+        mobiles = self.mobileList
+        mTable.reloadData()
     }
     
     @IBAction func onFavBtnClick(_ sender: UIButton) {
         allBtn.isSelected = false
         favBtn.isSelected = true
+        let selectedPersons = mobiles.filter {
+            $0.favouriteStatus!
+        }
+       
+        favList = selectedPersons
+        mobileList = self.mobiles
+        mobiles = self.favList
+        mTable.reloadData()
     }
-    @IBAction func onSortBtnClick(_ sender: UIButton) {
+    
+    @IBAction func onSortBtnClick(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Sort", message: "", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Price high to low", style: UIAlertAction.Style.default, handler: {(alert: UIAlertAction!) in self.sorting(type: "high")}))
+        alert.addAction(UIAlertAction(title: "Price low to high", style: UIAlertAction.Style.default, handler: {(alert: UIAlertAction!) in self.sorting(type: "low")}))
+        alert.addAction(UIAlertAction(title: "Rating", style: UIAlertAction.Style.default, handler:{ (alert: UIAlertAction!) in self.sorting(type: "rating")}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler:nil))
         self.present(alert, animated: true, completion: nil)
    
     }
-    func Message(){
-        
+    func sorting(type:String){
+        mobiles.sort { (lhs: Mobiles, rhs: Mobiles) -> Bool in
+            if type == "low" {
+                return lhs.price < rhs.price
+            }else if type == "high" {
+                return lhs.price > rhs.price
+            }else{
+            return lhs.rating > rhs.rating
+            }
+        }
+        mTable.reloadData()
+    }
+    
+    func btnFavTapped(cell : UITableViewCell){
+        let indexPath = mTable.indexPath(for: cell)
+        var id = mobiles[indexPath!.row].id
+        if mobiles[indexPath!.row].favouriteStatus == true
+        {
+            mobiles[indexPath!.row].favouriteStatus = false
+            
+            
+        }else{
+            mobiles[indexPath!.row].favouriteStatus = true
+        }
+//        print(mobiles[indexPath!.row].favouriteStatus)
+        for mobile in mobiles {
+            print("name: \(mobile.name)")
+            print("isFav: \(mobile.favouriteStatus)")
+        }
     }
     
   
