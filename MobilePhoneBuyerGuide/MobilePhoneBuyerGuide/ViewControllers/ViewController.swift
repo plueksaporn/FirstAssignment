@@ -46,6 +46,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
         }
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMobileDetail",
+            let viewController = segue.destination as? MobileDetailViewController,
+            let selected = sender as? Mobiles {
+            viewController.detail = selected
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.mobiles.count
@@ -65,14 +72,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.performSegue(withIdentifier: "showMobileDetail", sender: item)
 
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMobileDetail",
-            let viewController = segue.destination as? MobileDetailViewController,
-            let selected = sender as? Mobiles {
-            viewController.detail = selected
-        }
-    }
    
     @IBAction func onAllBtnClick(_ sender: UIButton) {
         allBtn.isSelected = true
@@ -81,17 +80,23 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         mTable.reloadData()
     }
     
-    @IBAction func onFavBtnClick(_ sender: UIButton) {
-        allBtn.isSelected = false
-        favBtn.isSelected = true
-        let selectedPersons = mobiles.filter {
+    @IBAction func onFavBtnClick(_ sender: AnyObject?) {
+        favBtn.isSelected = !favBtn.isSelected
+        let favouriteStatus = mobiles.filter {
             $0.favouriteStatus!
         }
-       
-        favList = selectedPersons
-        mobileList = self.mobiles
+        if favBtn.isSelected == true {
+        allBtn.isSelected = false
+        if sender != nil {
+            mobileList = self.mobiles
+        }
+        }else{
+             favBtn.isSelected = !favBtn.isSelected
+        }
+        favList = favouriteStatus
         mobiles = self.favList
         mTable.reloadData()
+        
     }
     
     @IBAction func onSortBtnClick(_ sender: UIBarButtonItem) {
@@ -118,22 +123,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func btnFavTapped(cell : UITableViewCell){
         let indexPath = mTable.indexPath(for: cell)
-        var id = mobiles[indexPath!.row].id
-        if mobiles[indexPath!.row].favouriteStatus == true
-        {
+//        var id = mobiles[indexPath!.row].id
+        if mobiles[indexPath!.row].favouriteStatus == true {
             mobiles[indexPath!.row].favouriteStatus = false
-            
-            
         }else{
             mobiles[indexPath!.row].favouriteStatus = true
         }
-//        print(mobiles[indexPath!.row].favouriteStatus)
-        for mobile in mobiles {
-            print("name: \(mobile.name)")
-            print("isFav: \(mobile.favouriteStatus)")
-        }
+       
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+           mobiles[indexPath.row].favouriteStatus = false
+            onFavBtnClick(nil)
+        }
+        
+    }
   
 
 }

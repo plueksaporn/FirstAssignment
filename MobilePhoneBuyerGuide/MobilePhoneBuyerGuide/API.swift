@@ -12,7 +12,7 @@ import SwiftyJSON
 
 protocol APIManagerProtocol {
     func getMobilesData(completion: @escaping (Swift.Result<[Mobiles], Error>) -> Void)
-    func getImages(mobileId: Int, completion: @escaping (Images) -> Void)
+    func getImages(mobileId: Int, completion: @escaping (Swift.Result<Images,Error>) -> Void)
 }
 
 class APIManager:APIManagerProtocol{
@@ -39,7 +39,7 @@ class APIManager:APIManagerProtocol{
         }
     }
     
-    func getImages(mobileId: Int, completion: @escaping (Images) -> Void) {
+    func getImages(mobileId: Int, completion: @escaping (Swift.Result<Images,Error>) -> Void) {
         self.baseURL = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(mobileId)/images/"
         print(self.baseURL)
         Alamofire.request("\(baseURL)")
@@ -49,16 +49,14 @@ class APIManager:APIManagerProtocol{
                 case .success:
                     do {
                         let images = try JSONDecoder().decode(Images.self, from: response.data!)
-                        completion(images)
+                        completion(.success(images))
                     } catch (let error) {
-                        print(error)
-//                        completion(.failure(error))
+                        completion(.failure(error))
                     }
-                    break
+//                    break
                 case .failure(let error):
-//                    completion("")
-                    print(error)
-                    break
+                    completion(.failure(error))
+//                    break
                 }
         }
     }

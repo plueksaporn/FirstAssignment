@@ -24,7 +24,7 @@ class CustomViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func MappingData(mobiles:Mobiles) -> Mobiles {
+    func MappingData(mobiles:Mobiles) {
         mImage.kf.setImage(with:URL(string: mobiles.thumbImageURL))
         mTitle.text=mobiles.name
         mDes.text=mobiles.description
@@ -37,9 +37,7 @@ class CustomViewCell: UITableViewCell {
             mFavourite.isSelected = false
             mobiles.favouriteStatus = false
         }
-//        mFavourite.isSelected = mobiles.favouriteStatus!
-//        mobiles.favouriteStatus = false
-        return mobiles
+    
     }
    
 

@@ -17,7 +17,15 @@ class CustomCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-//    func MapData(image:Images) {
-//        mImageView.kf
-//    }
+    func MapData(url:String) {
+        let firstWord = url.components(separatedBy: ".")
+        let word:String? = firstWord.first
+        if word == "www" {
+            print("https://\(firstWord.joined(separator: "."))")
+            mImageView.kf.setImage(with: URL(string: "https://\(firstWord.joined(separator: "."))" ))
+        }else{
+            mImageView.kf.setImage(with: URL(string: url))
+        }
+       
+    }
 }
