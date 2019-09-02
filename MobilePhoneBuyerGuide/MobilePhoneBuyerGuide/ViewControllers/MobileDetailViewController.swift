@@ -65,7 +65,7 @@ class MobileDetailViewController: UIViewController, UICollectionViewDelegateFlow
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showImage", for: indexPath) as! CustomCollectionViewCell
-        var item = self.images[indexPath.row].url
+        let item = self.images[indexPath.row].url
         cell.MapData(url: item)
         return cell
     }

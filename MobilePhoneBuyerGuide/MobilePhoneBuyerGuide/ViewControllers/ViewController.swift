@@ -29,6 +29,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         feedData()
         let sortBtn = UIBarButtonItem(title: "Sort", style: .plain, target: self, action:#selector(onSortBtnClick(_:)) )
         self.navigationItem.rightBarButtonItem = sortBtn
+        
        
     }
     
@@ -63,6 +64,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let mobilesData: Mobiles = mobiles[indexPath.item]
         cell.MappingData(mobiles:mobilesData)
         cell.delegate = self
+        if self.allBtn.isSelected == false {
+            cell.mFavourite.isHidden = true
+        }else{
+            cell.mFavourite.isHidden = false
+        }
         return cell
     }
     
@@ -74,16 +80,26 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
    
     @IBAction func onAllBtnClick(_ sender: UIButton) {
-        allBtn.isSelected = true
-        favBtn.isSelected = false
-        mobiles = self.mobileList
+        allBtn.isSelected = !allBtn.isSelected
+        
+        self.mTable.allowsSelectionDuringEditing = false
+        
+        if  allBtn.isSelected == true {
+            favBtn.isSelected = false
+             mobiles = self.mobileList
+        }else{
+            allBtn.isSelected = !allBtn.isSelected
+        }
+       
         mTable.reloadData()
     }
     
     @IBAction func onFavBtnClick(_ sender: AnyObject?) {
         favBtn.isSelected = !favBtn.isSelected
+        
         let favouriteStatus = mobiles.filter {
-            $0.favouriteStatus!
+            $0.favouriteStatus ?? false
+            
         }
         if favBtn.isSelected == true {
         allBtn.isSelected = false
@@ -123,23 +139,33 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func btnFavTapped(cell : UITableViewCell){
         let indexPath = mTable.indexPath(for: cell)
-//        var id = mobiles[indexPath!.row].id
         if mobiles[indexPath!.row].favouriteStatus == true {
             mobiles[indexPath!.row].favouriteStatus = false
         }else{
             mobiles[indexPath!.row].favouriteStatus = true
         }
+        
        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-           mobiles[indexPath.row].favouriteStatus = false
-            onFavBtnClick(nil)
-        }
-        
-    }
-  
+            if editingStyle == .delete {
+               mobiles[indexPath.row].favouriteStatus = false
+               onFavBtnClick(nil)
+            }
 
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if self.favBtn.isSelected == true
+        {
+            return .delete
+        }else{
+            return .none
+        }
+    }
+    
+    
+    
 }
 
