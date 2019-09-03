@@ -1,7 +1,14 @@
 ## Build generated
 build/
 DerivedData/
-
 Pods/
-
+.DS_Store
+*.swp
+*.lock
+*~.nib
+*.pbxuser
+*.FileExtension
+*.mode1v3
+*.mode2v3
+*.perspectivev3
 */xcuserdata/*
