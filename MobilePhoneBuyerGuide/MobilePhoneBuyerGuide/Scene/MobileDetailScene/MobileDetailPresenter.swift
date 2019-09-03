@@ -9,21 +9,19 @@
 import UIKit
 
 protocol MobileDetailPresenterInterface {
-  func presentSomething(response: MobileDetail.ShowDetail.Response)
+  func presentMobileDetail(response: MobileDetail.ShowDetail.Response)
 }
 
 class MobileDetailPresenter: MobileDetailPresenterInterface {
   weak var viewController: MobileDetailViewControllerInterface!
 
-  // MARK: - Presentation logic
-
-  func presentSomething(response: MobileDetail.ShowDetail.Response) {
+  func presentMobileDetail(response: MobileDetail.ShowDetail.Response) {
     let viewModel = MobileDetail.ShowDetail.ViewModel(
       model: response.model,
       rating: "Rating: \(String(response.rating))",
       price: "Price: $\(String(response.price))",
       name: response.name,
       description: response.description)
-    viewController.displaySomething(viewModel: viewModel)
+    viewController.displayMobileDetail(viewModel: viewModel)
   }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MobileDetailInteractorInterface {
-  func doSomething(request: MobileDetail.ShowDetail.Request)
+  func getImageData(request: MobileDetail.ShowDetail.Request)
   var model: [ImageEntity] { get set }
   var item: MobileEntity? { get set }
 }
@@ -19,13 +19,12 @@ class MobileDetailInteractor: MobileDetailInteractorInterface {
   var presenter: MobileDetailPresenterInterface!
   var worker: MobileDetailWorker?
   var model: [ImageEntity] = []
-  // MARK: - Business logic
-
-  func doSomething(request: MobileDetail.ShowDetail.Request) {
+  
+  func getImageData(request: MobileDetail.ShowDetail.Request) {
     guard let item = item else {
       return
     }
-    worker?.doSomeWork(mobileItem: item) { [weak self] in
+    worker?.getImageData(mobileItem: item) { [weak self] in
       if case let Result.success(data) = $0 {
         // If the result was successful, we keep the data so that we can deliver it to another view controller through the router.
         self?.model = data
@@ -38,10 +37,8 @@ class MobileDetailInteractor: MobileDetailInteractorInterface {
           price: item.price,
           name: item.name,
           description: item.description)
-        self?.presenter.presentSomething(response: response)
+        self?.presenter.presentMobileDetail(response: response)
       }
     }
-    
-    
   }
 }

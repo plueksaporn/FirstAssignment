@@ -15,8 +15,6 @@ protocol MobileListPresenterInterface {
 class MobileListPresenter: MobileListPresenterInterface {
   weak var viewController: MobileListViewControllerInterface!
 
-  // MARK: - Presentation logic
-
   func presentMobileList(response: Mobile.Mobile.Response) {
     var displayMobileList: [Mobile.Mobile.ViewModel.DisplayMobileModel] = []
     for item in response.model {

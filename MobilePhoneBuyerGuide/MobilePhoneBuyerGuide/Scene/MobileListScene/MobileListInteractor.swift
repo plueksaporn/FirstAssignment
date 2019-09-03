@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MobileListInteractorInterface {
-  func doSomething(request: Mobile.Mobile.Request)
+  func getMobileData(request: Mobile.Mobile.Request)
   func setFavourite(request: Mobile.SetFavorite.Request)
   func getFavouriteList(request: Mobile.ButtonStatus.Request)
   func getAllList(request: Mobile.ButtonStatus.Request)
@@ -28,7 +28,7 @@ class MobileListInteractor: MobileListInteractorInterface {
   var item: MobileEntity?
   // MARK: - Business logic
 
-  func doSomething(request: Mobile.Mobile.Request) {
+  func getMobileData(request: Mobile.Mobile.Request) {
     worker?.getMobileList { [weak self] in
       if case let Result.success(data) = $0 {
         self?.model = data
@@ -100,7 +100,4 @@ class MobileListInteractor: MobileListInteractorInterface {
     let response = Mobile.Mobile.Response(model: model)
     self.presenter.presentMobileList(response: response)
   }
-  
-  
-  
 }

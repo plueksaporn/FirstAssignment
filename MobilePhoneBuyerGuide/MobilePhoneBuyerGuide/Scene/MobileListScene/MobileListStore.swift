@@ -20,7 +20,7 @@ import SwiftyJSON
  */
 
 class MobileListStore: MobileListStoreProtocol {
-   var baseURL:String = "https://scb-test-mobile.herokuapp.com/api/mobiles/"
+  var baseURL:String = "https://scb-test-mobile.herokuapp.com/api/mobiles/"
   func getData(completion: @escaping (Swift.Result<[MobileEntity], Error>) -> Void) {
     Alamofire.request("\(baseURL)")
       .validate()

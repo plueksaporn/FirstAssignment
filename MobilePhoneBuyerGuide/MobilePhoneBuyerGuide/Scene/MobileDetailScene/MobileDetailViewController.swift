@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MobileDetailViewControllerInterface: class {
-  func displaySomething(viewModel: MobileDetail.ShowDetail.ViewModel)
+  func displayMobileDetail(viewModel: MobileDetail.ShowDetail.ViewModel)
   
 }
 
@@ -25,15 +25,12 @@ class MobileDetailViewController: UIViewController, MobileDetailViewControllerIn
       mCollection.reloadData()
     }
   }
-  // MARK: - Object lifecycle
-
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     configure(viewController: self)
   }
-
-  // MARK: - Configuration
-
+  
   private func configure(viewController: MobileDetailViewController) {
     let router = MobileDetailRouter()
     router.viewController = viewController
@@ -48,27 +45,24 @@ class MobileDetailViewController: UIViewController, MobileDetailViewControllerIn
     viewController.interactor = interactor
     viewController.router = router
   }
-  // MARK: - View lifecycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     doSomethingOnLoad()
-    
   }
-  // MARK: - Event handling
 
   func doSomethingOnLoad() {
-//    // NOTE: Ask the Interactor to do some work
       let request = MobileDetail.ShowDetail.Request(itemList: nil)
-      interactor.doSomething(request: request)
+      interactor.getImageData(request: request)
   }
-  func displaySomething(viewModel: MobileDetail.ShowDetail.ViewModel) {
-    
-    // NOTE: Display the result from the Presenter
+  
+  func displayMobileDetail(viewModel: MobileDetail.ShowDetail.ViewModel) {
     images = viewModel.model
     mLabelPrice.text = viewModel.price
     mLabelRating.text = viewModel.rating
     mTextDes.text = viewModel.description
   }
+  
   @IBAction func unwindToMobileDetailViewController(from segue: UIStoryboardSegue) {
     print("unwind...")
     router.passDataToNextScene(segue: segue)

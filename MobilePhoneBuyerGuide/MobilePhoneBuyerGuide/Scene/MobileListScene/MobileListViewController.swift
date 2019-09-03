@@ -11,11 +11,9 @@ import UIKit
 protocol MobileListViewControllerInterface: class {
   func displayMobileList(viewModel: Mobile.Mobile.ViewModel)  
   func setFavourite(index: IndexPath)
-  func setMobileItem(viewModel: Mobile.SendItem.ViewModel?)
 }
 
 class MobileListViewController: UIViewController, MobileListViewControllerInterface, UITableViewDelegate, UITableViewDataSource {
-  var item: MobileEntity?
   var mobileData: [Mobile.Mobile.ViewModel.DisplayMobileModel] = [] {
         didSet {
             mTable.reloadData()
@@ -49,62 +47,46 @@ class MobileListViewController: UIViewController, MobileListViewControllerInterf
     viewController.router = router
   }
 
-  // MARK: - View lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     mTable.estimatedRowHeight = CGFloat(500)
     mTable.rowHeight = UITableView.automaticDimension
-    doSomethingOnLoad()
+    doMobileListOnLoad()
     let sortBtn = UIBarButtonItem(title: "Sort", style: .plain, target: self, action:#selector(onSortBtnClick(_:)) )
     self.navigationItem.rightBarButtonItem = sortBtn
   }
  
-  func doSomethingOnLoad() {
-    // NOTE: Ask the Interactor to do some work
+  func doMobileListOnLoad() {
     let request = Mobile.Mobile.Request()
-    interactor.doSomething(request: request)
+    interactor.getMobileData(request: request)
   }
   
   func displayMobileList(viewModel: Mobile.Mobile.ViewModel) {
     mobileData = viewModel.displayMobileModels
-    // nameTextField.text = viewModel.name
-  }
-
-  // MARK: - Router
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    router.passDataToNextScene(segue: segue)
-   
-    }
-  
-
-  @IBAction func unwindToMobileListViewController(from segue: UIStoryboardSegue) {
-    print("unwind...")
-    router.passDataToNextScene(segue: segue)
   }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return interactor.model.count
-    }
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return interactor.model.count
+  }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = mTable.dequeueReusableCell(withIdentifier: "cell") as! CustomViewCell
-        let mobilesData: Mobile.Mobile.ViewModel.DisplayMobileModel  = mobileData[indexPath.item]
-        cell.MappingData(mobiles:mobilesData)
-        cell.delegate = self
-        if self.allBtn.isSelected == false {
-            cell.mFavourite.isHidden = true
-        }else{
-            cell.mFavourite.isHidden = false
-        }
-        return cell
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = mTable.dequeueReusableCell(withIdentifier: "cell") as! CustomMobileListViewCell
+    let mobilesData: Mobile.Mobile.ViewModel.DisplayMobileModel  = mobileData[indexPath.item]
+    cell.MappingData(mobiles:mobilesData)
+    cell.delegate = self
+    if self.allBtn.isSelected == false {
+      cell.mFavourite.isHidden = true
+    }else{
+      cell.mFavourite.isHidden = false
     }
+    return cell
+  }
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       setFavourite(index: indexPath)
       onFavBtnClick(true as AnyObject)
     }
-    
   }
   
   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -139,10 +121,6 @@ class MobileListViewController: UIViewController, MobileListViewControllerInterf
     mTable.reloadData()
   }
   
-  func setMobileItem(viewModel: Mobile.SendItem.ViewModel?) {
-    print("item")
-  }
-  
   @IBAction func onSortBtnClick(_ sender: UIBarButtonItem) {
     let alert = UIAlertController(title: "Sort", message: "", preferredStyle: UIAlertController.Style.alert)
     alert.addAction(UIAlertAction(title: "Price high to low", style: UIAlertAction.Style.default, handler: {(alert: UIAlertAction!) in self.interactor.sorting(request: Sorting.Request(type: "high"))}))
@@ -150,10 +128,9 @@ class MobileListViewController: UIViewController, MobileListViewControllerInterf
     alert.addAction(UIAlertAction(title: "Rating", style: UIAlertAction.Style.default, handler:{ (alert: UIAlertAction!) in self.interactor.sorting(request: Sorting.Request(type: "rating"))}))
     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler:nil))
     self.present(alert, animated: true, completion: nil)
-    
   }
   
-  
-  
-  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+  }
 }

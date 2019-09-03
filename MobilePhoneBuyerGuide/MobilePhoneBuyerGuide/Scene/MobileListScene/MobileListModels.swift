@@ -34,25 +34,9 @@ struct Mobile {
     }
   }
   
-    struct SetFavorite {
-      struct Request {
-        let indexPathCell: IndexPath
-      }
-      /// Data struct sent to Presenter
-      struct Response {
-        let model: [MobileEntity]
-      }
-      /// Data struct sent to ViewController
-      struct ViewModel {
-       
-      }
-    }
-  
-  struct ButtonStatus {
+  struct SetFavorite {
     struct Request {
-      var favouriteBtn: UIButton
-      var allBtn: UIButton
-      let repeateBtn: Bool
+      let indexPathCell: IndexPath
     }
     /// Data struct sent to Presenter
     struct Response {
@@ -64,25 +48,34 @@ struct Mobile {
     }
   }
   
+  struct ButtonStatus {
+    struct Request {
+      var favouriteBtn: UIButton
+      var allBtn: UIButton
+      let repeateBtn: Bool
+    }
+    
+    struct Response {
+      let model: [MobileEntity]
+    }
+    
+    struct ViewModel {
+    }
+  }
+  
   struct SendItem {
     
     struct Request {
        let indexPathCell: IndexPath
     }
-    /// Data struct sent to Presenter
+    
     struct Response {
       let item: MobileEntity
     }
-    /// Data struct sent to ViewController
+    
     struct ViewModel {
       let item: MobileEntity
     }
-  }
-  
-}
-struct Value {
-  enum Identifier: String {
-    case showMobileDetail = "showMobileDetail"
   }
 }
 
@@ -91,15 +84,8 @@ struct Sorting {
     var type: String
   }
   struct Response {
-    
   }
   struct ViewModel {
-   
-  }
-  enum Sort: String {
-    case PriceHighToLow = "high"
-    case PriceLowToHigh = "low"
-    case Rating = "rating"
   }
 }
 

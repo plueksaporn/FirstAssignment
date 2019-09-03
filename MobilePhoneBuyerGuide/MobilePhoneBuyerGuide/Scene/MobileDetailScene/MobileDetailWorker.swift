@@ -20,10 +20,7 @@ class MobileDetailWorker {
     self.store = store
   }
 
-  // MARK: - Business Logic
-
-  func doSomeWork(mobileItem: MobileEntity, _ completion: @escaping (Swift.Result<[ImageEntity], Error>) -> Void) {
-    // NOTE: Do the work
+  func getImageData(mobileItem: MobileEntity, _ completion: @escaping (Swift.Result<[ImageEntity], Error>) -> Void) {
     store.getData(mobileItem: mobileItem) {
       // The worker may perform some small business logic before returning the result to the Interactor
       completion($0)

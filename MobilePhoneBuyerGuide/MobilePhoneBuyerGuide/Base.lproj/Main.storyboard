@@ -19,11 +19,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hRN-I7-jrC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="300"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="379"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="hRN-I7-jrC" secondAttribute="height" multiplier="207:175" constant="59.140000000000001" id="ggq-rb-nvg"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Z2s-YB-Wex">
                                     <size key="itemSize" width="203" height="292"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -32,7 +29,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="showImage" id="CaD-rP-gnj" customClass="CustomCollectionViewCell" customModule="MobilePhoneBuyerGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="4" width="203" height="292"/>
+                                        <rect key="frame" x="0.0" y="43.5" width="203" height="292"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="203" height="292"/>
@@ -50,7 +47,7 @@
                                             <constraint firstAttribute="bottom" secondItem="2gd-w4-WjO" secondAttribute="bottom" constant="8" id="lca-d2-jZ6"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="mImageView" destination="2gd-w4-WjO" id="Pu9-F0-IR4"/>
+                                            <outlet property="mImageView" destination="2gd-w4-WjO" id="yRq-5O-r6u"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -92,7 +89,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="H2M-41-4PO">
-                                <rect key="frame" x="0.0" y="348" width="414" height="350"/>
+                                <rect key="frame" x="0.0" y="427" width="414" height="350"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="350" id="jeM-1T-p6k"/>
                                 </constraints>
@@ -102,13 +99,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hRN-I7-jrC" firstAttribute="leading" secondItem="k54-ZD-UaX" secondAttribute="leading" id="0UI-dO-YC1"/>
-                            <constraint firstItem="hRN-I7-jrC" firstAttribute="trailing" secondItem="k54-ZD-UaX" secondAttribute="trailing" id="GoG-WL-9Kz"/>
-                            <constraint firstItem="hRN-I7-jrC" firstAttribute="top" secondItem="k54-ZD-UaX" secondAttribute="top" id="HLH-LZ-vId"/>
+                            <constraint firstItem="hRN-I7-jrC" firstAttribute="top" secondItem="k54-ZD-UaX" secondAttribute="top" id="BH1-zt-MT2"/>
+                            <constraint firstItem="hRN-I7-jrC" firstAttribute="trailing" secondItem="k54-ZD-UaX" secondAttribute="trailing" id="Had-hy-4Wz"/>
+                            <constraint firstItem="hRN-I7-jrC" firstAttribute="leading" secondItem="k54-ZD-UaX" secondAttribute="leading" id="JNx-SV-peD"/>
                             <constraint firstItem="H2M-41-4PO" firstAttribute="trailing" secondItem="k54-ZD-UaX" secondAttribute="trailing" id="Vxb-MU-xf8"/>
                             <constraint firstItem="oae-rQ-2Zh" firstAttribute="trailing" secondItem="k54-ZD-UaX" secondAttribute="trailing" id="Xdi-hl-OI4"/>
                             <constraint firstItem="H2M-41-4PO" firstAttribute="leading" secondItem="k54-ZD-UaX" secondAttribute="leading" id="XoY-MZ-fd7"/>
-                            <constraint firstItem="H2M-41-4PO" firstAttribute="top" secondItem="hRN-I7-jrC" secondAttribute="bottom" constant="4" id="gsS-P7-dbG"/>
+                            <constraint firstItem="H2M-41-4PO" firstAttribute="top" secondItem="hRN-I7-jrC" secondAttribute="bottom" constant="4" id="tfA-b2-yDs"/>
+                            <constraint firstItem="k54-ZD-UaX" firstAttribute="bottom" secondItem="H2M-41-4PO" secondAttribute="bottom" constant="85" id="uAZ-ev-e5i"/>
                             <constraint firstItem="oae-rQ-2Zh" firstAttribute="top" secondItem="k54-ZD-UaX" secondAttribute="top" id="xPB-SU-Ufb"/>
                             <constraint firstItem="oae-rQ-2Zh" firstAttribute="leading" secondItem="k54-ZD-UaX" secondAttribute="leading" id="xPi-aY-pp7"/>
                         </constraints>
@@ -170,7 +168,7 @@
                                         <rect key="frame" x="0.0" y="67" width="414" height="658"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="133" id="BaW-eg-6uj" customClass="CustomViewCell" customModule="MobilePhoneBuyerGuide" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="133" id="BaW-eg-6uj" customClass="CustomMobileListViewCell" customModule="MobilePhoneBuyerGuide" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="133"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BaW-eg-6uj" id="NOD-Gt-DIv">
