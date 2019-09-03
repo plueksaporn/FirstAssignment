@@ -1,19 +1,19 @@
 //
-//  MobileListRouter.swift
+//  MobileDetailRouter.swift
 //  MobilePhoneBuyerGuide
 //
-//  Created by Plueksaporn Kattiyawong on 1/9/2562 BE.
+//  Created by Plueksaporn Kattiyawong on 3/9/2562 BE.
 //  Copyright (c) 2562 SCB. All rights reserved.
 //
 
 import UIKit
 
-protocol MobileListRouterInput {
+protocol MobileDetailRouterInput {
   func navigateToSomewhere()
 }
 
-class MobileListRouter: MobileListRouterInput {
-  weak var viewController: MobileListViewController!
+class MobileDetailRouter: MobileDetailRouterInput {
+  weak var viewController: MobileDetailViewController!
 
   // MARK: - Navigation
 

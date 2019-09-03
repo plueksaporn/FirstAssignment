@@ -21,12 +21,17 @@ import Foundation
 
  */
 
-enum Result<T> {
-  case success(T)
-  case failure(Error)
+// The entity or business object
+class MobileEntity : Codable {
+    let rating:Double
+    let id:Int
+    let thumbImageURL:String
+    let price:Double
+    let brand:String
+    let name:String
+    let description:String
+    var favouriteStatus:Bool?
 }
 
-//
-// The entity or business object
-//
-struct Entity {}
+
+

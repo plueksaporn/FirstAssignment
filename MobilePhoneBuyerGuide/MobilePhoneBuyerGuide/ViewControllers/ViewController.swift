@@ -24,51 +24,52 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mTable.estimatedRowHeight = CGFloat(500)
-        mTable.rowHeight = UITableView.automaticDimension
-        feedData()
-        let sortBtn = UIBarButtonItem(title: "Sort", style: .plain, target: self, action:#selector(onSortBtnClick(_:)) )
-        self.navigationItem.rightBarButtonItem = sortBtn
-        
-       
+//        mTable.estimatedRowHeight = CGFloat(500)
+//        mTable.rowHeight = UITableView.automaticDimension
+//        feedData()
+//        let sortBtn = UIBarButtonItem(title: "Sort", style: .plain, target: self, action:#selector(onSortBtnClick(_:)) )
+//        self.navigationItem.rightBarButtonItem = sortBtn
+//
+      
     }
     
     func feedData(){
-        api.getMobilesData() { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.mobiles = data
-            case .failure(let error):
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let dismissAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(dismissAction)
-                self?.present(alert, animated: true)
-            }
-            
-        }
+//        api.getMobilesData() { [weak self] result in
+//            switch result {
+//            case .success(let data):
+//                self?.mobiles = data
+//            case .failure(let error):
+//                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+//                let dismissAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                alert.addAction(dismissAction)
+//                self?.present(alert, animated: true)
+//            }
+//
+//        }
     }
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMobileDetail",
-            let viewController = segue.destination as? MobileDetailViewController,
+            let viewController = segue.destination as? MobileDetailViewControllers,
             let selected = sender as? Mobiles {
             viewController.detail = selected
         }
     }
-    
+  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.mobiles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = mTable.dequeueReusableCell(withIdentifier: "cell") as! CustomViewCell
-        let mobilesData: Mobiles = mobiles[indexPath.item]
-        cell.MappingData(mobiles:mobilesData)
-        cell.delegate = self
-        if self.allBtn.isSelected == false {
-            cell.mFavourite.isHidden = true
-        }else{
-            cell.mFavourite.isHidden = false
-        }
+//        let mobilesData: Mobiles = mobiles[indexPath.item]
+////        cell.MappingData(mobiles:mobilesData)
+////        cell.delegate = self
+//        if self.allBtn.isSelected == false {
+//            cell.mFavourite.isHidden = true
+//        }else{
+//            cell.mFavourite.isHidden = false
+//        }
         return cell
     }
     
@@ -80,39 +81,39 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
    
     @IBAction func onAllBtnClick(_ sender: UIButton) {
-        allBtn.isSelected = !allBtn.isSelected
-        
-        self.mTable.allowsSelectionDuringEditing = false
-        
-        if  allBtn.isSelected == true {
-            favBtn.isSelected = false
-             mobiles = self.mobileList
-        }else{
-            allBtn.isSelected = !allBtn.isSelected
-        }
-       
-        mTable.reloadData()
+//        allBtn.isSelected = !allBtn.isSelected
+//
+//        self.mTable.allowsSelectionDuringEditing = false
+//
+//        if  allBtn.isSelected == true {
+//            favBtn.isSelected = false
+//             mobiles = self.mobileList
+//        }else{
+//            allBtn.isSelected = !allBtn.isSelected
+//        }
+//
+//        mTable.reloadData()
     }
     
     @IBAction func onFavBtnClick(_ sender: AnyObject?) {
-        favBtn.isSelected = !favBtn.isSelected
-        
-        let favouriteStatus = mobiles.filter {
-            $0.favouriteStatus ?? false
-            
-        }
-        if favBtn.isSelected == true {
-        allBtn.isSelected = false
-        if sender != nil {
-            mobileList = self.mobiles
-        }
-        }else{
-             favBtn.isSelected = !favBtn.isSelected
-        }
-        favList = favouriteStatus
-        mobiles = self.favList
-        mTable.reloadData()
-        
+//        favBtn.isSelected = !favBtn.isSelected
+//        
+//        let favouriteStatus = mobiles.filter {
+//            $0.favouriteStatus ?? false
+//            
+//        }
+//        if favBtn.isSelected == true {
+//        allBtn.isSelected = false
+//        if sender != nil {
+//            mobileList = self.mobiles
+//        }
+//        }else{
+//             favBtn.isSelected = !favBtn.isSelected
+//        }
+//        favList = favouriteStatus
+//        mobiles = self.favList
+//        mTable.reloadData()
+//        
     }
     
     @IBAction func onSortBtnClick(_ sender: UIBarButtonItem) {
@@ -138,21 +139,21 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func btnFavTapped(cell : UITableViewCell){
-        let indexPath = mTable.indexPath(for: cell)
-        if mobiles[indexPath!.row].favouriteStatus == true {
-            mobiles[indexPath!.row].favouriteStatus = false
-        }else{
-            mobiles[indexPath!.row].favouriteStatus = true
-        }
-        
+//        let indexPath = mTable.indexPath(for: cell)
+//        if mobiles[indexPath!.row].favouriteStatus == true {
+//            mobiles[indexPath!.row].favouriteStatus = false
+//        }else{
+//            mobiles[indexPath!.row].favouriteStatus = true
+//        }
+      
        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-               mobiles[indexPath.row].favouriteStatus = false
-               onFavBtnClick(nil)
-            }
+//            if editingStyle == .delete {
+//               mobiles[indexPath.row].favouriteStatus = false
+//               onFavBtnClick(nil)
+//            }
 
     }
     
